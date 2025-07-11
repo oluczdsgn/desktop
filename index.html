@@ -243,6 +243,58 @@
             </div>
             <span>Pokemon TCG Cards</span>
         </a>
+
+        <a id="color-wheel-icon" class="app-icon">
+            <div class="icon-svg-container flex items-center justify-center bg-white rounded-lg">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23Z" fill="#EAEAEA"/>
+                    <path d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21V3Z" fill="#F56565"/>
+                    <path d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21V3Z" fill="#48BB78"/>
+                    <path d="M3 12C3 7.02944 7.02944 3 12 3V12H3Z" fill="#4299E1"/>
+                    <path d="M12 21C16.9706 21 21 16.9706 21 12H12V21Z" fill="#F6E05E"/>
+                </svg>
+            </div>
+            <span>Guia de Cor</span>
+        </a>
+
+        <a id="design-tool-icon" class="app-icon">
+            <div class="icon-svg-container flex items-center justify-center bg-gray-800 rounded-lg">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="rotate(45 12 12)">
+                        <path d="M8.5 7.5L15.5 14.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8.5 10.5L12.5 14.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M5 14C5 13.4477 5.44772 13 6 13H11C11.5523 13 12 13.4477 12 14V19C12 19.5523 11.5523 20 11 20H6C5.44772 20 5 19.5523 5 19V14Z" fill="#4A5568" stroke="white" stroke-width="2"/>
+                        <path d="M14 5C13.4477 5 13 5.44772 13 6V11C13 11.5523 13.4477 12 14 12H19C19.5523 12 20 11.5523 20 11V6C20 5.44772 19.5523 5 19 5H14Z" fill="#A0AEC0" stroke="white" stroke-width="2"/>
+                    </g>
+                </svg>
+            </div>
+            <span>Guia Design e UX</span>
+        </a>
+
+        <a id="font-guide-icon" class="app-icon">
+            <div class="icon-svg-container flex items-center justify-center bg-white rounded-lg">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 6H17" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 6V18" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 18H15" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span>Guia Tipografico</span>
+        </a>
+
+        <a id="creativity-quest-icon" class="app-icon">
+            <div class="icon-svg-container flex items-center justify-center bg-black rounded-lg">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 12h12M12 6v12"/>
+                    <path d="M18 12h-2a4 4 0 0 1-4-4V6"/>
+                    <path d="M6 12h2a4 4 0 0 0 4 4v2"/>
+                    <path d="M12 18v-2a4 4 0 0 0-4-4H6"/>
+                    <path d="M12 6V4a2 2 0 0 1 2-2h2"/>
+                    <path d="M18 6V4a2 2 0 0 0-2-2h-2"/>
+                </svg>
+            </div>
+            <span>Creativity Quest</span>
+        </a>
     </main>
 
     <script>
@@ -319,8 +371,12 @@
         // --- ABRIR LINKS COM DUPLO CLIQUE ---
         document.getElementById('color-palette-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/madruvacolorido/', '_blank'); });
         document.getElementById('moodboard-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/moodboard/', '_blank'); });
-        // Link do Pokémon atualizado
         document.getElementById('pokemon-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/pokemontcgcards/', '_blank'); });
+        document.getElementById('color-wheel-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiadecores/', '_blank'); });
+        document.getElementById('design-tool-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiadeisgneux/', '_blank'); });
+        document.getElementById('font-guide-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiatype/', '_blank'); });
+        document.getElementById('creativity-quest-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/CreativityQuest/', '_blank'); });
+
 
         // --- ATUALIZADOR DE HORA ---
         const timeElement = document.getElementById('time');
