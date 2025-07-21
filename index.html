@@ -136,6 +136,88 @@
             /* Proteção de fundo e sombra removida */
         }
 
+        /* --- JANELA DO GMAIL --- */
+        .gmail-window {
+            position: absolute;
+            top: 60px;
+            left: 180px; /* Posição ajustada para não sobrepor os ícones */
+            width: 700px;
+            max-width: 90%;
+            height: 500px;
+            background-color: rgba(242, 242, 247, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            resize: both;
+            overflow: hidden;
+            min-width: 350px;
+            min-height: 300px;
+        }
+
+        .gmail-window .title-bar {
+            height: 30px;
+            background-color: rgba(229, 229, 234, 0.8);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            cursor: move;
+            flex-shrink: 0;
+        }
+
+        .title-bar .controls { display: flex; gap: 8px; }
+        .title-bar .dot { height: 12px; width: 12px; border-radius: 50%; }
+        .dot.red { background-color: #FF5F56; }
+        .dot.yellow { background-color: #FFBD2E; }
+        .dot.green { background-color: #27C93F; }
+
+        .gmail-window .window-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            color: #1d1d1f;
+        }
+        
+        .email-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(60, 60, 67, 0.2);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .email-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .email-item.unread {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+        .email-sender {
+            width: 150px;
+            flex-shrink: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .email-subject {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .email-snippet {
+            color: #6c6c70;
+            margin-left: 8px;
+        }
+        .email-time {
+            margin-left: 20px;
+            font-size: 12px;
+            color: #3c3c43;
+        }
+
         /* Estilos para o Menu Hamburger */
         .hamburger-menu, .mobile-menu {
             display: none;
@@ -173,6 +255,8 @@
             .menu-bar {
                 padding: 0 10px;
             }
+            .gmail-window { display: none; }
+            .desktop-icons { left: 50%; transform: translateX(-50%); top: 50px; width: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; }
         }
     </style>
 </head>
@@ -211,6 +295,30 @@
         <a href="https://www.instagram.com/olucz____dsgn/" target="_blank" class="menu-item">Instagram</a>
     </div>
     
+    <!-- JANELA DO GMAIL -->
+    <div id="gmail-window" class="gmail-window">
+        <div class="title-bar" id="gmail-window-header">
+            <div class="controls">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+        </div>
+        <div class="window-body">
+            <div id="lookbook-email" class="email-item unread">
+                <div class="email-sender">Lookbook</div>
+                <div class="email-subject">fashion gallery</div>
+                <div class="email-time">Agora</div>
+            </div>
+            <!-- Novo e-mail adicionado -->
+            <div id="tuning-email" class="email-item unread">
+                <div class="email-sender">Tuning ex Machina</div>
+                <div class="email-subject">Gallery Tuning car</div>
+                <div class="email-time">Agora</div>
+            </div>
+        </div>
+    </div>
+
     <main class="desktop-icons">
         <a id="color-palette-icon" class="app-icon">
             <div class="icon-svg-container flex items-center justify-center bg-white rounded-lg">
@@ -285,13 +393,13 @@
         <a id="creativity-quest-icon" class="app-icon">
             <div class="icon-svg-container flex items-center justify-center bg-black rounded-lg">
                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 12h12M12 6v12"/>
-                    <path d="M18 12h-2a4 4 0 0 1-4-4V6"/>
-                    <path d="M6 12h2a4 4 0 0 0 4 4v2"/>
-                    <path d="M12 18v-2a4 4 0 0 0-4-4H6"/>
-                    <path d="M12 6V4a2 2 0 0 1 2-2h2"/>
-                    <path d="M18 6V4a2 2 0 0 0-2-2h-2"/>
-                </svg>
+                     <path d="M6 12h12M12 6v12"/>
+                     <path d="M18 12h-2a4 4 0 0 1-4-4V6"/>
+                     <path d="M6 12h2a4 4 0 0 0 4 4v2"/>
+                     <path d="M12 18v-2a4 4 0 0 0-4-4H6"/>
+                     <path d="M12 6V4a2 2 0 0 1 2-2h2"/>
+                     <path d="M18 6V4a2 2 0 0 0-2-2h-2"/>
+                 </svg>
             </div>
             <span>Creativity Quest</span>
         </a>
@@ -368,14 +476,18 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // --- ABRIR LINKS COM DUPLO CLIQUE ---
-        document.getElementById('color-palette-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/madruvacolorido/', '_blank'); });
-        document.getElementById('moodboard-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/moodboard/', '_blank'); });
-        document.getElementById('pokemon-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/pokemontcgcards/', '_blank'); });
-        document.getElementById('color-wheel-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiadecores/', '_blank'); });
-        document.getElementById('design-tool-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiadeisgneux/', '_blank'); });
-        document.getElementById('font-guide-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiatype/', '_blank'); });
-        document.getElementById('creativity-quest-icon').addEventListener('dblclick', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/CreativityQuest/', '_blank'); });
+        // --- ABRIR LINKS COM CLIQUE ÚNICO ---
+        document.getElementById('color-palette-icon').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/madruvacolorido/', '_blank'); });
+        document.getElementById('moodboard-icon').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/moodboard/', '_blank'); });
+        document.getElementById('pokemon-icon').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/pokemontcgcards/', '_blank'); });
+        document.getElementById('color-wheel-icon').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiadecores/', '_blank'); });
+        document.getElementById('design-tool-icon').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiadeisgneux/', '_blank'); });
+        document.getElementById('font-guide-icon').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/guiatype/', '_blank'); });
+        document.getElementById('creativity-quest-icon').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/CreativityQuest/', '_blank'); });
+        
+        // --- ABRIR LINK DO E-MAIL ---
+        document.getElementById('lookbook-email').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/lookbook/', '_blank'); });
+        document.getElementById('tuning-email').addEventListener('click', (e) => { e.preventDefault(); window.open('https://oluczdsgn.github.io/tuningex/', '_blank'); });
 
 
         // --- ATUALIZADOR DE HORA ---
@@ -398,6 +510,31 @@
         }
         sessionStorage.setItem('visitCount', visitCount);
         counterElement.textContent = visitCount;
+
+        // --- SCRIPT PARA ARRASTAR A JANELA ---
+        const gmailWindow = document.getElementById('gmail-window');
+        const header = document.getElementById('gmail-window-header');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        header.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - gmailWindow.offsetLeft;
+            offsetY = e.clientY - gmailWindow.offsetTop;
+            document.body.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                gmailWindow.style.left = `${e.clientX - offsetX}px`;
+                gmailWindow.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.body.style.cursor = 'default';
+        });
 
     </script>
 
